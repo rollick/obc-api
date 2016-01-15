@@ -1,0 +1,94 @@
+FORMAT: 1A
+HOST: http://olivetree.apiblueprint.org/
+
+# Olive Tree Shop
+
+Olive Tree Shop is a simple API allowing visitors to shop for store items in the Olive Tree Campaign website.
+
+## Orders Collection [/orders]
+
+### Create a New Order [POST]
+
+You may create your own order using this action. It will return an Order ID which can be used to add Order Items to the Order.
+
++ Request (application/json)
+
+        {
+            "id": "569538775e258431fe172990"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /orders/569538775e258431fe172990
+
+    + Body
+
+            {
+                "id": "569538775e258431fe172990",
+                "created_at": "2015-08-05T08:40:51.620Z",
+                "updated_at": "2015-08-05T08:40:51.620Z",
+                "total_amount" 0,
+                "currency": "euro",
+                "order_items": []
+            }
+
+## Order Items Collection [/order_items]
+
+### List All Order Items [GET]
+
+You may list your own order items using this action. It requires an order id as a parameter.
+
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /order_items{?order_id}
+
+    + Body
+    
+            [
+                {
+                    "id": "569538fe618ce0cf7e894009",
+                    "product_id": "plant-1"
+                }, {
+                    "id": "569539c97cf28d505e0fcf82",
+                    "product_id": "plant-2"
+                }, {
+                    "choice": "56953a247cf28d505e0fcf83",
+                    "product_id": "plant-3"
+                }
+            ]
+
+### Create a New Order Item [POST]
+
+You may create your own order item using this action. It will accept an order id, product id and order item data. The order item data is an JSON object.
+
++ Request (application/json)
+
+        {
+            "order_id": "569538775e258431fe172990",
+            "product_id": "plant-1",
+            "data": {
+                
+            }
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /order_items/569538fe618ce0cf7e894009
+
+    + Body
+
+            {
+                "id": "569538fe618ce0cf7e894009",
+                "product_id": "plant-1",
+                "total_amount" 45,
+                "product_description": "5 trees and 2 booklets",
+                "created_at": "2015-08-05T08:40:51.620Z",
+                "updated_at": "2015-08-05T08:40:51.620Z"
+            }
